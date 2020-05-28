@@ -1,48 +1,46 @@
 import React, {Component, Fragment} from 'react';
 import {BrowserRouter as Router, Route, Switch, withRouter} from 'react-router-dom';
 import {connect} from 'react-redux';
-import Dashboard from './Dashboard';
+import Home from './Home';
 import NewQuestion from './NewQuestion';
-import QuestionPoll from './QuestionPoll';
-import QuestionPollResults from './QuestionPollResults';
-import Leaderboard from './Leaderboard';
-import Navbar from './Navbar';
+import QuestionPoll from './Votes';
+import QuestionResults from './VotingRes';
+import Board from './Board';
+import Nav from './Nav';
 import Login from './Login';
 import Logout from './Logout';
 import ProtectedRoute from './ProtectedRoute';
-import LoadingBar from 'react-redux-loading';
 import PageNotFound from './PageNotFound';
-import {handleGetQuestions} from "../actions/questions";
+import {handleQuestions} from "../actions/questions";
 
 class App extends Component {
     componentDidMount() {
-        this.props.dispatch(handleGetQuestions());
+        this.props.dispatch(handleQuestions());
     }
 
     render() {
         return (
             <Router>
                 <Fragment>
-                    <LoadingBar />
                     {this.props.authenticated == null
                         ? null
-                        : <Navbar loggedInUser={this.props.loggedInUser}/>
+                        : <Nav loggedInUser={this.props.loggedInUser}/>
                     }
                     <div>
                         {this.props.loading === true
                             ? null
                             : <div>
                                 <Switch>
-                                    <ProtectedRoute path='/' exact component={Dashboard}
+                                    <ProtectedRoute path='/' exact component={Home}
                                                     isAuthenticated={this.props.authenticated}/>
                                     <ProtectedRoute path='/question/:id' exact component={connect(mapStateToProps)(QuestionPoll)}
                                                     isAuthenticated={this.props.authenticated}/>
                                     <ProtectedRoute path='/question/:id/results'
-                                                    exact component={connect(mapStateToProps)(QuestionPollResults)}
+                                                    exact component={connect(mapStateToProps)(QuestionResults)}
                                                     isAuthenticated={this.props.authenticated}/>
                                     <ProtectedRoute path='/add' exact component={NewQuestion}
                                                     isAuthenticated={this.props.authenticated}/>
-                                    <ProtectedRoute path='/leaderboard' exact component={Leaderboard}
+                                    <ProtectedRoute path='/leaderboard' exact component={Board}
                                                     isAuthenticated={this.props.authenticated}/>
                                     <Route path="/login" exact component={withRouter(Login)}/>
                                     <Route path="/logout" exact component={withRouter(Logout)}/>

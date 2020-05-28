@@ -23,16 +23,16 @@ class Dashboard extends Component {
             <div>
                 <div className='projectContainer'>
                     <div className='container'>
-                        <div className='row justify-content-center'>
-                            <div className='col-sm-8'>
+                        <div className="align-center">
+                            <div className="home">
                                 <div className='center'>
                                     <button type='button'
-                                            className={"btn btn-info " + (activeTab === 'unanswered' ? 'active' : null)}
+                                            className={"btn-info " + (activeTab === 'unanswered' ? 'active' : null)}
                                             onClick={(e) => this.handleTabChange(e, 'unanswered')}>Unanswered
                                         Questions
                                     </button>
                                     <button type='button'
-                                            className={"btn btn-info " + (activeTab === 'answered' ? 'active' : null)}
+                                            className={"btn-info " + (activeTab === 'answered' ? 'active' : null)}
                                             onClick={(e) => this.handleTabChange(e, 'answered')}>Answered
                                         Questions
                                     </button>
@@ -40,12 +40,12 @@ class Dashboard extends Component {
                             </div>
                         </div>
 
-                        <div className='row justify-content-center'>
-                            <div className='col-sm-8'>
+                        <div>
+                            <div>
                                 {this.props.questionIds.map((id) => {
                                     return (
                                         <Question key={id} id={id}
-                                                  questionsToShow={questionsToShow}/>
+                                        questionsToShow={questionsToShow}/>
                                     )
                                 })}
                             </div>

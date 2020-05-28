@@ -1,11 +1,10 @@
 import { saveQuestion, saveQuestionAnswer } from '../utils/api';
 import { addUserQuestion, addUserQuestionAnswer } from './users';
 import { addQuestion, addQuestionAnswer} from './questions';
-import { showLoading, hideLoading } from 'react-redux-loading';
 
-export function handleAddQuestionAnswer (questionId, selectedOption) {
+
+export function handleAddAnswer (questionId, selectedOption) {
     return (dispatch, getState) => {
-        dispatch(showLoading());
 
         const {login} = getState();
         const authedUser = login.loggedInUser.id;
@@ -17,14 +16,12 @@ export function handleAddQuestionAnswer (questionId, selectedOption) {
         }).then(() => {
             dispatch(addQuestionAnswer(authedUser, questionId, selectedOption));
             dispatch(addUserQuestionAnswer(authedUser, questionId, selectedOption));
-            dispatch(hideLoading());
         });
     }
 }
 
-export function handleAddQuestion (optionOneText, optionTwoText, callback) {
+export function handleAddingQuestion (optionOneText, optionTwoText, callback) {
     return (dispatch, getState) => {
-        dispatch(showLoading());
 
         const {login} = getState();
         const author = login.loggedInUser.id;
@@ -36,7 +33,6 @@ export function handleAddQuestion (optionOneText, optionTwoText, callback) {
         }).then((question) => {
             dispatch(addUserQuestion(question));
             dispatch(addQuestion(question));
-            dispatch(showLoading());
         }).then(callback);
     }
 }

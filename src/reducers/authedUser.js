@@ -1,14 +1,14 @@
-import {AUTH_LOGIN_SUCCESS, AUTH_LOGOUT_SUCCESS} from "../actions/auth";
+import {SUCCESS_LOGIN, SUCCESS_LOGOUT} from "../actions/authedUser";
 
-export default function auth(state = {}, action) {
+export default function authedUser(state = {}, action) {
     switch (action.type) {
-        case AUTH_LOGIN_SUCCESS:
+        case SUCCESS_LOGIN:
             return {
                 ...state,
                 authenticated: action.authenticated,
                 loggedInUser: action.loggedInUser
             };
-        case AUTH_LOGOUT_SUCCESS:
+        case SUCCESS_LOGOUT:
             return {
                 ...state,
                 authenticated: action.authenticated,

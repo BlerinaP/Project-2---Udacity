@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {handleAddQuestion} from '../actions/shared';
+import {handleAddingQuestion} from '../actions';
 import {Redirect} from 'react-router-dom';
 
 class NewQuestion extends Component {
@@ -12,7 +12,7 @@ class NewQuestion extends Component {
         hasSubmitted: false
     };
 
-    handleOptionOneTextChange = (e) => {
+    handleOptOneTextChange = (e) => {
         const text = e.target.value;
 
         this.setState({
@@ -20,7 +20,7 @@ class NewQuestion extends Component {
         });
     };
 
-    handleOptionTwoTextChange = (e) => {
+    handleOptTwoTextChange = (e) => {
         const text = e.target.value;
 
         this.setState({
@@ -32,13 +32,13 @@ class NewQuestion extends Component {
         e.preventDefault();
 
         const {optionOneText, optionTwoText} = this.state;
-        const {dispatch} = this.props;
+        const dispatch = this.props.dispatch;
 
         this.setState({
             hasSubmitted: true
         });
 
-        dispatch(handleAddQuestion(optionOneText, optionTwoText, () => {
+        dispatch(handleAddingQuestion(optionOneText, optionTwoText, () => {
             this.setState({
                 optionOneText: '',
                 optionTwoText: '',
@@ -63,50 +63,44 @@ class NewQuestion extends Component {
             <div>
                 <div className='projectContainer'>
                     <div className='container'>
-                        <div className='row justify-content-center'>
-                            <div className='col-sm-8'>
-                                <div className='card'>
-                                    <div className='card-header bold'>Create New Question</div>
-                                    <div className='card-body'>
+                        <div className="newQuestion">
+                                <div className="newQs-container">
+                                    <div className="title">Create New Question</div>
+                                    <div>
                                         <div className='container'>
-                                            <div className='row justify-content-center p-20-top-bottom'>
-                                                <div className='col-sm-12'>
-                                                    <p><strong>Would You Rather...?</strong></p>
-                                                    <form onSubmit={this.handleSubmit}>
-                                                        <div className='form-group'>
-                                                            <input
-                                                                className='form-control'
-                                                                placeholder='Enter option one text here...'
-                                                                value={optionOneText}
-                                                                onChange={this.handleOptionOneTextChange}
-                                                            />
+                                           <p><strong>Would You Rather...?</strong></p>
+                                              <form onSubmit={this.handleSubmit}>
+                                                 <div>
+                                                     <input
+                                                         className="input-style"
+                                                          placeholder='Enter option one text here...'
+                                                          value={optionOneText}
+                                                          onChange={this.handleOptOneTextChange}
+                                                       />
                                                         </div>
-                                                        <div className='form-group'>
+                                                        <div >
                                                             <input
-                                                                className='form-control'
+                                                                className="input-style"
                                                                 placeholder='Enter option two text here...'
                                                                 value={optionTwoText}
-                                                                onChange={this.handleOptionTwoTextChange}
+                                                                onChange={this.handleOptTwoTextChange}
                                                             />
                                                         </div>
                                                         <input type='submit'
-                                                               name='submit'
-                                                               id='submit'
-                                                               value={hasSubmitted ? "Submitting Question..." : "Submit"}
-                                                               className='btn btn-outline-primary'
-                                                               disabled={
-                                                                   optionOneText === '' ||
-                                                                   optionTwoText === '' ||
-                                                                   hasSubmitted
-                                                               } />
-                                                    </form>
-                                                </div>
-                                            </div>
+                                                           name='submit'
+                                                           className="input-style"
+                                                           id='submit'
+                                                           value={hasSubmitted ? "Submitting Question..." : "Submit"}
+                                                           disabled={
+                                                           optionOneText === '' ||
+                                                           optionTwoText === '' ||
+                                                           hasSubmitted
+                                                    } />
+                                              </form>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
+                          </div>
                     </div>
                 </div>
             </div>

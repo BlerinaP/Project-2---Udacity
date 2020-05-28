@@ -1,6 +1,6 @@
 import React from 'react';
 import {connect} from 'react-redux';
-import {formatQuestion} from "../utils/helpers";
+import {formatQuestion} from "../utils/helperFunctions";
 import {Link} from 'react-router-dom';
 
 const Question = (props) => {
@@ -27,21 +27,20 @@ const Question = (props) => {
     }
 
     return (
-        <div className='margin-top-10'>
-            <div className='card'>
-                <div className='card-header bold'>{name} asks would you rather...</div>
-                <div className='card-body'>
-                    <div className='container'>
-                        <div className='row justify-content-center'>
-                            <div className='col-sm-4 border-right center'>
+        <div>
+            <div className="center">
+                <div className="addsome">{name} asks would you rather...</div>
+                <div>
+                    <div>
+                        <div className="user-infos">
+                            <div className="img-avatar">
                                 <img src={avatar} alt={`Avatar of ${name}`} className='avatar'/>
                             </div>
-                            <div className='col-sm-8'>
-                                <div className='question-info'>
+                            <div>
+                                <div>
                                     <p className='center'>{optionOne.text} <strong>OR</strong> {optionTwo.text}</p>
                                     <Link to={viewPollLink} className='center'>
-                                        <button
-                                            className='btn btn-outline-primary reset-vertical-margin '>
+                                        <button className="btn addsome">
                                             View Poll
                                         </button>
                                     </Link>

@@ -6,7 +6,6 @@ import {Provider} from 'react-redux';
 import reducer from './reducers';
 import middleware from './middleware';
 
-import 'bootstrap/dist/css/bootstrap.css';
 import './index.css';
 
 import App from './components/App';

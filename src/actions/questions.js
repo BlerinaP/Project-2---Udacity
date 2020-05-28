@@ -1,13 +1,12 @@
 import {getQuestions} from '../utils/api';
-import {showLoading, hideLoading} from 'react-redux-loading';
 
-export const RECEIVE_QUESTIONS = 'RECEIVE_QUESTIONS';
+export const GET_QUESTIONS = 'RECEIVE_QUESTIONS';
 export const ADD_QUESTION = 'ADD_QUESTION';
 export const ADD_QUESTION_ANSWER = 'ADD_QUESTION_ANSWER';
 
 export function receiveQuestions(questions) {
     return {
-        type: RECEIVE_QUESTIONS,
+        type: GET_QUESTIONS,
         questions
     }
 }
@@ -28,13 +27,11 @@ export function addQuestionAnswer(authedUser, questionId, selectedOption) {
     }
 }
 
-export function handleGetQuestions() {
+export function handleQuestions() {
     return (dispatch) => {
-        dispatch(showLoading());
         return getQuestions()
             .then((questions) => {
                 dispatch(receiveQuestions(questions));
-                dispatch(hideLoading());
             });
     }
 }

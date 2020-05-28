@@ -20,25 +20,25 @@ const QuestionPollResults = (props) => {
         <div>
             <div className='projectContainer'>
                 <div className='container'>
-                    <div className='row justify-content-center'>
-                        <div className='col-sm-8'>
-                            <div className='card'>
-                                <div className='card-header bold'>Added by {author.name}</div>
-                                <div className='card-body'>
-                                    <div className='container'>
-                                        <div className='row justify-content-center'>
-                                            <div className='col-sm-4 border-right vert-align'>
+                    <div>
+                        <div>
+                            <div className="center">
+                                <div className="addsome">Added by {author.name}</div>
+                                <div>
+                                    <div>
+                                        <div className="user-infos">
+                                            <div className="img-avatar">
                                                 <img src={author.avatarURL}
                                                      alt={`Avatar of ${author.name}`}
                                                      className='avatar'/>
                                             </div>
-                                            <div className='col-sm-8'>
-                                                <div className='question-info'>
-                                                    <div className='col-sm-12 '>
-                                                        <div className='results-header'>Results:</div>
-                                                        <div className={`card card-poll-results ${(optionSelected === 'optionOne') ? "chosen-answer" : ""}`}>Would you rather {question.optionOne.text}?
+                                            <div>
+                                                <div>
+                                                    <div >
+                                                        <div className="addsome">Results:</div>
+                                                        <div className={` ${(optionSelected === 'optionOne') ? "chosen-answer" : ""}`}>Would you rather {question.optionOne.text}?
 
-                                                            <div className="progress m-progress--sm">
+                                                            <div>
                                                                 <div className="progress-bar m--bg-success"
                                                                      style={{ width: optionOneWidth + '%' }}
                                                                      ></div>
@@ -48,7 +48,7 @@ const QuestionPollResults = (props) => {
                                                             </div>
 
                                                         </div>
-                                                        <div className={`card card-poll-results ${(optionSelected === 'optionTwo') ? "chosen-answer" : ""}`}>Would you rather {question.optionTwo.text}?
+                                                        <div className={`addsome  ${(optionSelected === 'optionTwo') ? "chosen-answer" : ""}`}>Would you rather {question.optionTwo.text}?
 
                                                             <div className="progress m-progress--sm">
                                                                 <div className="progress-bar m--bg-success"

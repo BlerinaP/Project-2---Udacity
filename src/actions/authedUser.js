@@ -1,12 +1,11 @@
 import {getUser} from '../utils/api';
-import { showLoading, hideLoading } from 'react-redux-loading';
 
-export const AUTH_LOGIN_SUCCESS = 'LOGIN_SUCCESS';
-export const AUTH_LOGOUT_SUCCESS = 'LOGOUT_SUCCESS';
+export const SUCCESS_LOGIN = 'SUCCESS_LOGIN ';
+export const SUCCESS_LOGOUT = 'SUCCESS_LOGOUT';
 
 export function receiveAuthLogin(user) {
     return {
-        type: AUTH_LOGIN_SUCCESS,
+        type: SUCCESS_LOGIN,
         authenticated: true,
         loggedInUser: user
     }
@@ -14,26 +13,22 @@ export function receiveAuthLogin(user) {
 
 export function receiveAuthLogout() {
     return {
-        type: AUTH_LOGOUT_SUCCESS,
+        type: SUCCESS_LOGOUT,
         authenticated: null,
         loggedInUser: null
     }
 }
 
-export function handleLoginUser(id) {
+export function handleLogin(id) {
     return (dispatch) => {
-        dispatch(showLoading());
         getUser(id).then((user) => {
             dispatch(receiveAuthLogin(user));
-            dispatch(hideLoading());
         });
     };
 }
 
-export function handleLogoutUser() {
+export function handleLogout() {
     return (dispatch) => {
-        dispatch(showLoading());
         dispatch(receiveAuthLogout());
-        dispatch(hideLoading());
     }
 }

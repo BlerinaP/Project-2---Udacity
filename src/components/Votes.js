@@ -1,10 +1,10 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {handleAddQuestionAnswer} from '../actions/shared';
+import {handleAddAnswer} from '../actions';
 import {Redirect} from "react-router-dom";
 import PageNotFound from "./PageNotFound";
 
-class QuestionPoll extends Component {
+class Votes extends Component {
 
     state = {
         optionSelected: '',
@@ -14,10 +14,10 @@ class QuestionPoll extends Component {
     handleSubmit(e, questionId) {
         e.preventDefault();
 
-        const {dispatch} = this.props;
-        const {optionSelected} = this.state;
+        const dispatch = this.props.dispatch;
+        const optionSelected = this.state.optionSelected;
 
-        dispatch(handleAddQuestionAnswer(questionId, optionSelected));
+        dispatch(handleAddAnswer(questionId, optionSelected));
 
         this.setState(() => ({
             optionSelected: '',
@@ -26,10 +26,10 @@ class QuestionPoll extends Component {
     }
 
     handleInputChange = (e) => {
-        const text = e.target.value;
+        const writtenText = e.target.value;
 
         this.setState(() => ({
-            optionSelected: text
+            optionSelected: writtenText
         }));
     };
 
@@ -51,24 +51,24 @@ class QuestionPoll extends Component {
             <div>
                 <div className='projectContainer'>
                     <div className='container'>
-                        <div className='row justify-content-center'>
-                            <div className='col-sm-8'>
-                                <div className='card'>
-                                    <div className='card-header bold'>{author.name} asks would you rather...</div>
-                                    <div className='card-body'>
+                        <div className='main-box'>
+                            <div className="box-container">
+                                <div className="asking">
+                                    <div>{author.name} asks would you rather...</div>
+                                    <div>
                                         <div className='container'>
-                                            <div className='row justify-content-center'>
-                                                <div className='col-sm-4 border-right center'>
+                                            <div>
+                                                <div className="img-avatar">
                                                     <img src={author.avatarURL}
                                                          alt={`Avatar of ${author.name}`}
                                                          className='avatar'/>
                                                 </div>
-                                                <div className='col-sm-8'>
-                                                    <div className='question-info'>
+                                                <div>
+                                                    <div>
                                                         <form onSubmit={(e) => this.handleSubmit(e, id)}>
                                                             <div className="form-check">
-                                                                <input className="form-check-input"
-                                                                       type="radio"
+                                                                <input
+                                                                       type="checkbox"
                                                                        name="questionPoll"
                                                                        id="optionOne"
                                                                        value="optionOne"
@@ -80,25 +80,22 @@ class QuestionPoll extends Component {
                                                                     {question.optionOne.text}
                                                                 </label>
                                                             </div>
-                                                            <div className="form-check">
-                                                                <input className="form-check-input"
-                                                                       type="radio"
+                                                            <div>
+                                                                <input
+                                                                       type="checkbox"
                                                                        name="questionPoll"
                                                                        id="optionTwo"
                                                                        value="optionTwo"
                                                                        onChange={this.handleInputChange}
                                                                 />
                                                                 <label
-                                                                    className="form-check-label"
                                                                     htmlFor="exampleRadios2">
                                                                     {question.optionTwo.text}
                                                                 </label>
                                                             </div>
-                                                            <button
-                                                                className='btn btn-outline-primary m-15-top'
+                                                            <button className="btn"
                                                                 type='submit'
-                                                                disabled={optionSelected === ''}
-                                                            >
+                                                                disabled={optionSelected === ''}>
                                                                 Submit
                                                             </button>
                                                         </form>
@@ -139,4 +136,4 @@ function mapStateToProps({login, questions, users, match}, props) {
     }
 }
 
-export default connect(mapStateToProps)(QuestionPoll);
+export default connect(mapStateToProps)(Votes);
